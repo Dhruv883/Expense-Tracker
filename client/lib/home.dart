@@ -8,11 +8,13 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
+void addModal() {}
+
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
+        appBar: PreferredSize(
           preferredSize: const Size.fromHeight(200.0),
           child: AppBar(
             automaticallyImplyLeading: false,
@@ -43,10 +45,11 @@ class _HomeState extends State<Home> {
                     )),
               ),
             ],
-          )),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 80),
-        child: Container(
+          ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 60),
+          child: Container(
             width: double.infinity,
             decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 66, 34, 74),
@@ -68,16 +71,6 @@ class _HomeState extends State<Home> {
                           fontSize: 23,
                         ),
                       ),
-                      // Text(
-                      //   "See All",
-                      //   style: TextStyle(
-                      //     color: Colors.white,
-                      //     fontSize: 15,
-                      //     decoration: TextDecoration.underline,
-                      //     decorationColor: Colors.transparent,
-                      //   ),
-                      //   textAlign: TextAlign.right,
-                      // ),
                       TextButton(
                         onPressed: () {
                           Navigator.push(
@@ -101,7 +94,7 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                   const SizedBox(
-                    height: 40,
+                    height: 25,
                   ),
                   const Align(
                     alignment: Alignment.topLeft,
@@ -113,7 +106,7 @@ class _HomeState extends State<Home> {
                         )),
                   ),
                   const SizedBox(
-                    height: 40,
+                    height: 25,
                   ),
                   const Align(
                     alignment: Alignment.topLeft,
@@ -125,7 +118,7 @@ class _HomeState extends State<Home> {
                         )),
                   ),
                   const SizedBox(
-                    height: 40,
+                    height: 25,
                   ),
                   const Align(
                     alignment: Alignment.topLeft,
@@ -138,9 +131,19 @@ class _HomeState extends State<Home> {
                   ),
                 ],
               ),
-            )),
-      ),
-    );
+            ),
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            _showSimpleModalDialog(context);
+          },
+          tooltip: 'Add Transaction',
+          backgroundColor: const Color.fromARGB(255, 93, 21, 112),
+          foregroundColor: Colors.white,
+          child: const Icon(Icons.add),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat);
   }
 }
 
@@ -167,4 +170,101 @@ class Blocks extends StatelessWidget {
       ),
     );
   }
+}
+
+_showSimpleModalDialog(BuildContext context) {
+  String? title = "";
+  double amount = 0.0;
+  String? selectedAction = "Withdraw"; // Default choice
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: Container(
+          constraints: const BoxConstraints(maxHeight: 450),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Add Transaction",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: Colors.black,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  decoration: const InputDecoration(labelText: 'Title'),
+                  onChanged: (value) {
+                    title = value;
+                  },
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(labelText: 'Amount'),
+                  keyboardType: TextInputType.number,
+                  onChanged: (value) {
+                    amount = double.tryParse(value) ?? 0.0;
+                  },
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  "Transaction Type",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: Colors.black,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Radio(
+                      value: "Withdraw",
+                      groupValue: selectedAction,
+                      onChanged: (value) {
+                        selectedAction = value;
+                      },
+                    ),
+                    const Text("Withdraw"),
+                    Radio(
+                      value: "Deposit",
+                      groupValue: selectedAction,
+                      onChanged: (value) {
+                        selectedAction = value;
+                      },
+                    ),
+                    const Text("Deposit"),
+                    const SizedBox(height: 20),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        print("Title: $title");
+                        print("Amount: $amount");
+                        print("Action: $selectedAction");
+
+                        // Close the dialog
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("ADD"),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  );
 }
