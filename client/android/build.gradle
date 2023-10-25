@@ -30,18 +30,3 @@ tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
 
-Project-level build.gradle (<project>/build.gradle):
-buildscript {
-  dependencies {
-    // Add this line
-    classpath 'com.google.gms:google-services:4.2.0'
-  }
-}
-App-level build.gradle (<project>/<app-module>/build.gradle):
-dependencies {
-  // Add this line
-  implementation 'com.google.firebase:firebase-core:17.0.0'
-}
-...
-// Add to the bottom of the file
-apply plugin: 'com.google.gms.google-services'
