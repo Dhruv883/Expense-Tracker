@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(
             seedColor: const Color.fromARGB(255, 66, 34, 74)),
+
         useMaterial3: true,
       ),
       home: const Login(),

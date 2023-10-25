@@ -15,13 +15,11 @@ class _HomeState extends State<Home> {
           preferredSize: const Size.fromHeight(200.0),
           child: AppBar(
             automaticallyImplyLeading: false,
-            title: Container(
-              child: const Padding(
-                padding: EdgeInsets.only(top: 10.0),
-                child: Text(
-                  "Hello,\nVedant Chavan",
-                  style: TextStyle(color: Colors.white),
-                ),
+            title: const Padding(
+              padding: EdgeInsets.only(top: 10.0),
+              child: Text(
+                "Hello,\nVedant Chavan",
+                style: TextStyle(color: Colors.white),
               ),
             ),
             toolbarHeight: 80,
@@ -43,6 +41,104 @@ class _HomeState extends State<Home> {
               ),
             ],
           )),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 80),
+        child: Container(
+            width: double.infinity,
+            decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 66, 34, 74),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(55.55),
+                  topRight: Radius.circular(55.55),
+                )),
+            child: const Padding(
+              padding: EdgeInsets.all(18.0),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        "Recent Transactions",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 23,
+                        ),
+                      ),
+                      Text(
+                        "See All",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                        ),
+                        textAlign: TextAlign.right,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: SizedBox(
+                        width: double.infinity,
+                        child: Blocks(
+                          "McDonald's\n -₹699",
+                          Colors.white,
+                        )),
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: SizedBox(
+                        width: double.infinity,
+                        child: Blocks(
+                          "McDonald's\n -₹699",
+                          Colors.white,
+                        )),
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: SizedBox(
+                        width: double.infinity,
+                        child: Blocks(
+                          "McDonald's\n -₹699",
+                          Colors.white,
+                        )),
+                  ),
+                ],
+              ),
+            )),
+      ),
+    );
+  }
+}
+
+class Blocks extends StatelessWidget {
+  final String text;
+  final Color color;
+
+  const Blocks(this.text, this.color, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 93, 21, 112),
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+      ),
+      padding: const EdgeInsets.only(left: 15, top: 5, bottom: 5),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: color,
+          fontSize: 22,
+        ),
+      ),
     );
   }
 }
