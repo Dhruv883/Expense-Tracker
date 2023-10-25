@@ -31,16 +31,16 @@ class _AllState extends State<All> {
   @override
   Widget build(BuildContext context) {
     final List<String> sampleItems = [
-      "McDonald's\n -₹699",
-      "Burger King\n -₹599",
-      "Pizza Hut\n -₹799",
-      "KFC\n -₹649",
-      "Subway\n -₹499",
-      "Domino's\n -₹599",
-      "Starbucks\n -₹349",
-      "Taco Bell\n -₹699",
-      "Wendy's\n -₹549",
-      "In-N-Out\n -₹899",
+      "McDonald's\n - ₹699",
+      "McDonald's\n - ₹699",
+      "McDonald's\n - ₹699",
+      "Subway\n - ₹499",
+      "Subway\n - ₹499",
+      "Subway\n - ₹499",
+      "Subway\n - ₹499",
+      "Domino's\n - ₹599",
+      "Domino's\n - ₹599",
+      "Domino's\n - ₹599",
     ];
 
     return Scaffold(

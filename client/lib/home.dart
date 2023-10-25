@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
                 ],
               ),
               Positioned(
-                height: 95,
+                height: 105,
                 top: 100.0,
                 left: 60.0,
                 right: 60.0,
@@ -62,7 +62,7 @@ class _HomeState extends State<Home> {
                   child: const Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(12.0),
                         child: Text(
                           "Total Balance",
                           textAlign: TextAlign.center,
@@ -83,7 +83,7 @@ class _HomeState extends State<Home> {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.only(top: 45),
+          padding: const EdgeInsets.only(top: 40),
           child: Container(
             width: double.infinity,
             decoration: const BoxDecoration(
@@ -106,16 +106,6 @@ class _HomeState extends State<Home> {
                           fontSize: 23,
                         ),
                       ),
-                      // Text(
-                      //   "See All",
-                      //   style: TextStyle(
-                      //     color: Colors.white,
-                      //     fontSize: 15,
-                      //     decoration: TextDecoration.underline,
-                      //     decorationColor: Colors.transparent,
-                      //   ),
-                      //   textAlign: TextAlign.right,
-                      // ),
                       TextButton(
                         onPressed: () {
                           Navigator.push(
@@ -230,7 +220,11 @@ _showSimpleModalDialog(BuildContext context) {
           borderRadius: BorderRadius.circular(20.0),
         ),
         child: Container(
-          constraints: const BoxConstraints(maxHeight: 450),
+          constraints: const BoxConstraints(maxHeight: 350),
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 93, 21, 112),
+            borderRadius: BorderRadius.circular(20.0),
+          ),
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(
@@ -242,18 +236,28 @@ _showSimpleModalDialog(BuildContext context) {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
-                  decoration: const InputDecoration(labelText: 'Title'),
+                  decoration: const InputDecoration(
+                    labelText: 'Title',
+                    labelStyle: TextStyle(color: Colors.white),
+                    hintStyle: TextStyle(color: Colors.white),
+                  ),
+                  style: const TextStyle(color: Colors.white),
                   onChanged: (value) {
                     title = value;
                   },
                 ),
                 TextFormField(
-                  decoration: const InputDecoration(labelText: 'Amount'),
+                  decoration: const InputDecoration(
+                    labelText: 'Amount',
+                    labelStyle: TextStyle(color: Colors.white),
+                    hintStyle: TextStyle(color: Colors.white),
+                  ),
+                  style: const TextStyle(color: Colors.white),
                   keyboardType: TextInputType.number,
                   onChanged: (value) {
                     amount = double.tryParse(value) ?? 0.0;
@@ -265,7 +269,7 @@ _showSimpleModalDialog(BuildContext context) {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
                 Row(
@@ -292,16 +296,22 @@ _showSimpleModalDialog(BuildContext context) {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    TextButton(
-                      onPressed: () {
-                        print("Title: $title");
-                        print("Amount: $amount");
-                        print("Action: $selectedAction");
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: TextButton(
+                        onPressed: () {
+                          print("Title: $title");
+                          print("Amount: $amount");
+                          print("Action: $selectedAction");
 
-                        // Close the dialog
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text("ADD"),
+                          // Close the dialog
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text(
+                          "ADD",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
                     ),
                   ],
                 ),
