@@ -15,40 +15,75 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(200.0),
-          child: AppBar(
-            automaticallyImplyLeading: false,
-            title: Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-              child: Text(
-                "Hello,\n${widget.name}",
-                style: const TextStyle(color: Colors.white),
+          preferredSize: const Size.fromHeight(225.0),
+          child: Stack(
+            children: [
+              AppBar(
+                automaticallyImplyLeading: false,
+                title: const Padding(
+                  padding: EdgeInsets.only(top: 10.0),
+                  child: Text(
+                    // "Hello,\n${widget.name}",
+                    "Hello,\nDhruv",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                toolbarHeight: 80,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(35.55),
+                    bottomRight: Radius.circular(35.55),
+                  ),
+                ),
+                backgroundColor: const Color.fromARGB(255, 66, 34, 74),
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10.0, top: 10),
+                    child: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.account_circle,
+                          color: Colors.white,
+                          size: 50,
+                        )),
+                  ),
+                ],
               ),
-            ),
-            toolbarHeight: 80,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(35.55),
-                bottomRight: Radius.circular(35.55),
-              ),
-            ),
-            backgroundColor: const Color.fromARGB(255, 66, 34, 74),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 10.0, top: 10),
-                child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.account_circle,
-                      color: Colors.white,
-                      size: 50,
-                    )),
-              ),
+              Positioned(
+                height: 95,
+                top: 100.0,
+                left: 60.0,
+                right: 60.0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 93, 21, 112),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: const Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "Total Balance",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                      Text(
+                        "Rs 2000",
+                        style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.white), // Set text color to white
+                      ),
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.only(top: 60),
+          padding: const EdgeInsets.only(top: 45),
           child: Container(
             width: double.infinity,
             decoration: const BoxDecoration(
@@ -71,6 +106,16 @@ class _HomeState extends State<Home> {
                           fontSize: 23,
                         ),
                       ),
+                      // Text(
+                      //   "See All",
+                      //   style: TextStyle(
+                      //     color: Colors.white,
+                      //     fontSize: 15,
+                      //     decoration: TextDecoration.underline,
+                      //     decorationColor: Colors.transparent,
+                      //   ),
+                      //   textAlign: TextAlign.right,
+                      // ),
                       TextButton(
                         onPressed: () {
                           Navigator.push(
