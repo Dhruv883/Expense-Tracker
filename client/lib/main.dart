@@ -1,4 +1,4 @@
-import 'package:client/home.dart';
+import 'package:client/login.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,11 +30,11 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme:
-            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 66, 34, 74)),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromARGB(255, 66, 34, 74)),
         useMaterial3: true,
       ),
-      home: const Home(),
+      home: const Login(),
     );
   }
 }

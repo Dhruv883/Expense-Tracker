@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
-
+  const Home({super.key, required this.name});
+  final String name;
   @override
   State<Home> createState() => _HomeState();
 }
@@ -14,6 +14,7 @@ class _HomeState extends State<Home> {
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(200.0),
           child: AppBar(
+            automaticallyImplyLeading: false,
             title: Container(
               child: const Padding(
                 padding: EdgeInsets.only(top: 10.0),
