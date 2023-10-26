@@ -1,6 +1,6 @@
 import 'package:client/login.dart';
 import 'package:flutter/material.dart';
-// import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class Signup extends StatefulWidget {
   // final String name;
@@ -9,6 +9,17 @@ class Signup extends StatefulWidget {
 
   @override
   State<Signup> createState() => _SignupState();
+}
+
+void signup(String name, String password) {
+  FirebaseDatabase.instance.setPersistenceEnabled(true);
+  FirebaseDatabase.instance.ref().keepSynced(true);
+
+  FirebaseDatabase.instance
+      .ref()
+      .child("users")
+      .push()
+      .set({"name": name, "password": password});
 }
 
 class _SignupState extends State<Signup> {
@@ -85,10 +96,7 @@ class _SignupState extends State<Signup> {
                 child: Center(
                   child: ElevatedButton(
                     onPressed: () {
-                      // if (nameController.text == "dhruv@gmail.com" &&
-                      //     passwordController.text == "dhruv") {
-                      print(nameController.text);
-                      print(passwordController.text);
+                      signup(nameController.text, passwordController.text);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
