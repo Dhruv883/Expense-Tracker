@@ -8,8 +8,6 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-void addModal() {}
-
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
@@ -20,12 +18,12 @@ class _HomeState extends State<Home> {
             children: [
               AppBar(
                 automaticallyImplyLeading: false,
-                title: const Padding(
-                  padding: EdgeInsets.only(top: 10.0),
+                title: Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
                   child: Text(
-                    // "Hello,\n${widget.name}",
-                    "Hello,\nDhruv",
-                    style: TextStyle(color: Colors.white),
+                    "Hello,\n${widget.name}",
+                    // "Hello,\nDhruv",
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
                 toolbarHeight: 80,
@@ -51,7 +49,7 @@ class _HomeState extends State<Home> {
               ),
               Positioned(
                 height: 115,
-                top: 120.0,
+                top: 125.0,
                 left: 60.0,
                 right: 60.0,
                 child: Container(
@@ -119,7 +117,7 @@ class _HomeState extends State<Home> {
                           "See All",
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 15,
+                            fontSize: 17,
                             decoration: TextDecoration.underline,
                             decorationColor: Colors.transparent,
                           ),
@@ -222,101 +220,100 @@ class Blocks extends StatelessWidget {
 _showSimpleModalDialog(BuildContext context) {
   String? title = "";
   double amount = 0.0;
-  String? selectedAction = "Withdraw"; // Default choice
+  String? selectedAction = "Withdraw";
 
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        child: Container(
-          constraints: const BoxConstraints(maxHeight: 380),
-          decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 93, 21, 112),
-            borderRadius: BorderRadius.circular(20.0),
+      return AlertDialog(
+        title: const Text(
+          "Add Transaction",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+            color: Colors.white,
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Add Transaction",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Colors.white,
-                  ),
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Title',
+                  labelStyle: TextStyle(color: Colors.white),
+                  hintStyle: TextStyle(color: Colors.white),
                 ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Title',
-                    labelStyle: TextStyle(color: Colors.white),
-                    hintStyle: TextStyle(color: Colors.white),
-                  ),
-                  style: const TextStyle(color: Colors.white),
-                  onChanged: (value) {
-                    title = value;
-                  },
+                style: const TextStyle(color: Colors.white),
+                onChanged: (value) {
+                  title = value;
+                },
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Amount',
+                  labelStyle: TextStyle(color: Colors.white),
+                  hintStyle: TextStyle(color: Colors.white),
                 ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Amount',
-                    labelStyle: TextStyle(color: Colors.white),
-                    hintStyle: TextStyle(color: Colors.white),
-                  ),
-                  style: const TextStyle(color: Colors.white),
-                  keyboardType: TextInputType.number,
-                  onChanged: (value) {
-                    amount = double.tryParse(value) ?? 0.0;
-                  },
+                style: const TextStyle(color: Colors.white),
+                keyboardType: TextInputType.number,
+                onChanged: (value) {
+                  amount = double.tryParse(value) ?? 0.0;
+                },
+              ),
+              const Text(
+                "Transaction Type",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.white,
                 ),
-                const SizedBox(height: 20),
-                const Text(
-                  "Transaction Type",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color: Colors.white,
-                  ),
-                ),
-                Row(
-                  children: [
-                    Radio(
-                      value: "Withdraw",
-                      groupValue: selectedAction,
-                      onChanged: (value) {
-                        selectedAction = value;
-                      },
-                    ),
-                    const Text("Withdraw"),
-                    Radio(
-                      value: "Deposit",
-                      groupValue: selectedAction,
-                      onChanged: (value) {
-                        selectedAction = value;
-                      },
-                    ),
-                    const Text("Deposit"),
-                    const SizedBox(height: 20),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
+              ),
+              StatefulBuilder(
+                builder: (context, setState) {
+                  return Row(
+                    children: [
+                      Radio(
+                        value: "Withdraw",
+                        groupValue: selectedAction,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedAction = value;
+                          });
+                        },
+                      ),
+                      const Text("Withdraw"),
+                      Radio(
+                        value: "Deposit",
+                        groupValue: selectedAction,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedAction = value;
+                          });
+                        },
+                      ),
+                      const Text("Deposit"),
+                    ],
+                  );
+                },
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 66, 34, 74),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
                       child: TextButton(
                         onPressed: () {
                           print("Title: $title");
                           print("Amount: $amount");
                           print("Action: $selectedAction");
 
-                          // Close the dialog
                           Navigator.of(context).pop();
                         },
                         child: const Text(
@@ -325,12 +322,13 @@ _showSimpleModalDialog(BuildContext context) {
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
+        backgroundColor: Color.fromARGB(255, 93, 21, 112),
       );
     },
   );

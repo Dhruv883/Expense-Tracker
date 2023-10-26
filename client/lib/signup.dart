@@ -1,4 +1,5 @@
 import 'package:client/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -11,19 +12,19 @@ class Signup extends StatefulWidget {
   State<Signup> createState() => _SignupState();
 }
 
-void signup(String name, String password) {
-  FirebaseDatabase.instance.setPersistenceEnabled(true);
-  FirebaseDatabase.instance.ref().keepSynced(true);
-
-  FirebaseDatabase.instance
-      .ref()
-      .child("users")
-      .push()
-      .set({"name": name, "password": password});
+void signup(String name, String password, String email) {
+  // FirebaseDatabase.instance
+  //     .ref()
+  //     .child("users")
+  //     .push()
+  //     .set({"name": name, "password": password});
+  FirebaseAuth.instance
+      .createUserWithEmailAndPassword(email: email, password: password);
 }
 
 class _SignupState extends State<Signup> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -47,6 +48,27 @@ class _SignupState extends State<Signup> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: TextFormField(
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                  ),
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(),
+                      labelText: "Email"),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your Email';
+                    }
+                    return null;
+                  },
+                ),
+              ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
@@ -97,13 +119,23 @@ class _SignupState extends State<Signup> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        signup(nameController.text, passwordController.text);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Login(),
-                          ),
-                        );
+                        FirebaseDatabase.instance.setPersistenceEnabled(true);
+                        FirebaseDatabase.instance.ref().keepSynced(true);
+
+                        FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                                email: emailController.text,
+                                password: passwordController.text)
+                            .then(
+                              (value) => {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const Login(),
+                                  ),
+                                )
+                              },
+                            );
                       }
                     },
                     // },

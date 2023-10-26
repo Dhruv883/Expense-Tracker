@@ -1,6 +1,8 @@
 import 'package:client/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:client/home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -11,6 +13,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -46,10 +49,10 @@ class _LoginState extends State<Login> {
                   decoration: const InputDecoration(
                       fillColor: Colors.white,
                       border: OutlineInputBorder(),
-                      labelText: "Username"),
+                      labelText: "Email"),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your Username';
+                      return 'Please enter your Email';
                     }
                     return null;
                   },
@@ -83,21 +86,29 @@ class _LoginState extends State<Login> {
                 child: Center(
                   child: ElevatedButton(
                     onPressed: () {
-                      // if (nameController.text == "dhruv@gmail.com" &&
-                      //     passwordController.text == "dhruv") {
                       if (_formKey.currentState!.validate()) {
-                        signup(nameController.text, passwordController.text);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Home(
-                              name: nameController.text,
-                            ),
-                          ),
-                        );
+                        // login(nameController.text, passwordController.text);
+                        FirebaseDatabase.instance.setPersistenceEnabled(true);
+                        FirebaseDatabase.instance.ref().keepSynced(true);
+
+                        FirebaseAuth.instance
+                            .signInWithEmailAndPassword(
+                                email: nameController.text,
+                                password: passwordController.text)
+                            .then(
+                              (value) => {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Home(
+                                      name: nameController.text,
+                                    ),
+                                  ),
+                                )
+                              },
+                            );
                       }
                     },
-                    // },
                     child: const Text(
                       'Login',
                       style: TextStyle(
