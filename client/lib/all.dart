@@ -1,4 +1,3 @@
-import 'package:client/login.dart';
 import 'package:flutter/material.dart';
 // import 'package:firebase_database/firebase_database.dart';
 
@@ -50,8 +49,8 @@ class _AllState extends State<All> {
         backgroundColor: const Color.fromARGB(255, 93, 21, 112),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(15.55),
-            bottomRight: Radius.circular(15.55),
+            bottomLeft: Radius.circular(10.55),
+            bottomRight: Radius.circular(10.55),
           ),
         ),
       ),
@@ -59,7 +58,7 @@ class _AllState extends State<All> {
         itemCount: sampleItems.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(10.0),
             child: Align(
               alignment: Alignment.topLeft,
               child: SizedBox(

@@ -50,8 +50,8 @@ class _HomeState extends State<Home> {
                 ],
               ),
               Positioned(
-                height: 105,
-                top: 100.0,
+                height: 115,
+                top: 120.0,
                 left: 60.0,
                 right: 60.0,
                 child: Container(
@@ -62,17 +62,17 @@ class _HomeState extends State<Home> {
                   child: const Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(12.0),
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
                           "Total Balance",
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+                          style: TextStyle(fontSize: 25, color: Colors.white),
                         ),
                       ),
                       Text(
                         "Rs 2000",
                         style: TextStyle(
-                            fontSize: 24,
+                            fontSize: 30,
                             color: Colors.white), // Set text color to white
                       ),
                     ],
@@ -164,6 +164,18 @@ class _HomeState extends State<Home> {
                           Colors.white,
                         )),
                   ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  const Align(
+                    alignment: Alignment.topLeft,
+                    child: SizedBox(
+                        width: double.infinity,
+                        child: Blocks(
+                          "McDonald's\n -₹699",
+                          Colors.white,
+                        )),
+                  ),
                 ],
               ),
             ),
@@ -178,7 +190,7 @@ class _HomeState extends State<Home> {
           foregroundColor: Colors.white,
           child: const Icon(Icons.add),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat);
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat);
   }
 }
 
@@ -220,7 +232,7 @@ _showSimpleModalDialog(BuildContext context) {
           borderRadius: BorderRadius.circular(20.0),
         ),
         child: Container(
-          constraints: const BoxConstraints(maxHeight: 350),
+          constraints: const BoxConstraints(maxHeight: 380),
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 93, 21, 112),
             borderRadius: BorderRadius.circular(20.0),
