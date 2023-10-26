@@ -96,13 +96,15 @@ class _SignupState extends State<Signup> {
                 child: Center(
                   child: ElevatedButton(
                     onPressed: () {
-                      signup(nameController.text, passwordController.text);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Login(),
-                        ),
-                      );
+                      if (_formKey.currentState!.validate()) {
+                        signup(nameController.text, passwordController.text);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Login(),
+                          ),
+                        );
+                      }
                     },
                     // },
                     child: const Text(

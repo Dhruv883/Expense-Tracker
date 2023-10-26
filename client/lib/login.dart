@@ -85,18 +85,17 @@ class _LoginState extends State<Login> {
                     onPressed: () {
                       // if (nameController.text == "dhruv@gmail.com" &&
                       //     passwordController.text == "dhruv") {
-
-                      print(nameController.text);
-                      print(passwordController.text);
-
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Home(
-                            name: nameController.text,
+                      if (_formKey.currentState!.validate()) {
+                        signup(nameController.text, passwordController.text);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Home(
+                              name: nameController.text,
+                            ),
                           ),
-                        ),
-                      );
+                        );
+                      }
                     },
                     // },
                     child: const Text(
